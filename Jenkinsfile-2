@@ -4,16 +4,17 @@ pipeline {
   }
   environment {
     MYSQLDB_CREDS=credentials('mysqldb-credentials')
+    
   }
   stages {
     stage('Status') {
       steps {
-        sh 'liquibase status --url="jdbc:mysql://192.168.134.130:3306/test" --changeLogFile=my_app-wrapper.xml --username=$MYSQLDB_CREDS_USR --password=$MYSQLDB_CREDS_PSW'
+        sh 'liquibase status --url="jdbc:mysql://192.168.134.130:3306/cabinfo" --changeLogFile=my_app-wrapper.xml --username=$MYSQLDB_CREDS_USR --password=$MYSQLDB_CREDS_PSW'
       }
     }
     stage('Update') {
       steps {
-        sh 'liquibase update --url="jdbc:mysql://192.168.134.130:3306/test" --changeLogFile=my_app-wrapper.xml --username=$MYSQLDB_CREDS_USR --password=$MYSQLDB_CREDS_PSW'
+        sh 'liquibase update --url="jdbc:mysql://192.168.134.130:3306/cabinfo" --changeLogFile=my_app-wrapper.xml --username=$MYSQLDB_CREDS_USR --password=$MYSQLDB_CREDS_PSW'
       }
     }
   }
